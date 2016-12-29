@@ -1,6 +1,7 @@
 package iqq.im;
 
 import com.alibaba.fastjson.JSON;
+import static iqq.im.WebQQClient.flag;
 import iqq.im.actor.SwingActorDispatcher;
 import iqq.im.bean.QQDiscuz;
 import iqq.im.bean.QQGroup;
@@ -75,7 +76,13 @@ public class QRcodeLoginTest {
                             @Override
                             public void onActionEvent(QQActionEvent event) {
                                 if (event.getType() == QQActionEvent.Type.EVT_OK) {
-                                    System.out.println("加载群列表成功");
+                                    for (QQGroup g : mClient.getGroupList()) {
+                                            System.out.println("加载群列表成功");
+                                            if (flag == 0) {
+                                                mClient.getGroupInfo(g, this);
+                                            }
+
+                                    }
                                 }
                             }
                         });

@@ -13,30 +13,33 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
 * limitations under the License.
-*/
-
+ */
 /**
  * Project  : WebQQCore
  * Package  : iqq.im.action
  * File     : GetGroupInfoAction.java
  * Author   : solosky < solosky772@qq.com >
- * Created  : 2013-3-28
- * License  : Apache License 2.0
+ * Created : 2013-3-28 License : Apache License 2.0
  */
 package iqq.im.action;
 
 import iqq.im.QQActionListener;
 import iqq.im.QQException;
 import iqq.im.QQException.QQErrorCode;
+import static iqq.im.WebQQClient.flag;
 import iqq.im.bean.QQClientType;
 import iqq.im.bean.QQGroup;
 import iqq.im.bean.QQGroupMember;
 import iqq.im.bean.QQStatus;
 import iqq.im.core.QQConstants;
 import iqq.im.core.QQContext;
+import iqq.im.core.QQService;
+import iqq.im.core.QQSession;
 import iqq.im.event.QQActionEvent;
+import iqq.im.http.QQHttpCookie;
 import iqq.im.http.QQHttpRequest;
 import iqq.im.http.QQHttpResponse;
+import iqq.im.service.HttpService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,16 +54,18 @@ import java.util.Date;
  * @author solosky
  */
 public class GetGroupInfoAction extends AbstractHttpAction {
+
     private static final Logger LOG = LoggerFactory.getLogger(GetGroupInfoAction.class);
 
     private QQGroup group;
 
     /**
-     * <p>Constructor for GetGroupInfoAction.</p>
+     * <p>
+     * Constructor for GetGroupInfoAction.</p>
      *
-     * @param context  a {@link iqq.im.core.QQContext} object.
+     * @param context a {@link iqq.im.core.QQContext} object.
      * @param listener a {@link iqq.im.QQActionListener} object.
-     * @param group    a {@link iqq.im.bean.QQGroup} object.
+     * @param group a {@link iqq.im.bean.QQGroup} object.
      */
     public GetGroupInfoAction(QQContext context, QQActionListener listener, QQGroup group) {
         super(context, listener);
@@ -143,6 +148,7 @@ public class GetGroupInfoAction extends AbstractHttpAction {
 
             notifyActionEvent(QQActionEvent.Type.EVT_OK, group);
         } else {
+            System.out.println("获取群JSON失败,retcode不等于0");
             notifyActionEvent(QQActionEvent.Type.EVT_ERROR, QQErrorCode.UNEXPECTED_RESPONSE);
         }
     }
@@ -152,15 +158,18 @@ public class GetGroupInfoAction extends AbstractHttpAction {
      */
     @Override
     protected QQHttpRequest onBuildRequest() throws QQException, JSONException {
+        QQSession session = getContext().getSession();
         QQHttpRequest req = createHttpRequest("GET", QQConstants.URL_GET_GROUP_INFO_EXT);
         req.addGetValue("gcode", group.getCode() + "");
-        req.addGetValue("vfwebqq", getContext().getAccount().getVfwebqq());
+//        req.addGetValue("vfwebqq", getContext().getAccount().getVfwebqq());
+        req.addGetValue("vfwebqq", session.getVfwebqq());
         req.addGetValue("t", System.currentTimeMillis() / 1000 + "");
-        req.addHeader("Referer",QQConstants.REFERER_S);
-        System.out.println("vfwebqq session:"+getContext().getSession().getVfwebqq());
-        System.out.println("vfwebqq account:"+getContext().getAccount().getVfwebqq());
+        req.addHeader("Referer", QQConstants.REFERER_S);
+        //System.out.println("vfwebqq session:" + getContext().getSession().getVfwebqq());
+        //System.out.println("vfwebqq account:" + getContext().getAccount().getVfwebqq());
+        
+        flag++;
         return req;
     }
-
 
 }

@@ -1,6 +1,7 @@
 package iqq.im;
 
 import com.alibaba.fastjson.JSON;
+import static iqq.im.WebQQClient.flag;
 import iqq.im.actor.SwingActorDispatcher;
 import iqq.im.bean.QQDiscuz;
 import iqq.im.bean.QQGroup;
@@ -75,10 +76,16 @@ public class QRcodeLoginTest {
                             @Override
                             public void onActionEvent(QQActionEvent event) {
                                 if (event.getType() == QQActionEvent.Type.EVT_OK) {
-                                    System.out.println("加载群列表成功");
+                                    for (QQGroup g : mClient.getGroupList()) {
+                                            if (flag == 0) {
+                                                mClient.getGroupInfo(g, this);
+                                            }
+
+                                    }
                                 }
                             }
                         });
+                        System.out.println("加载群列表成功");
                         mClient.getDiscuzList(new QQActionListener() {
                             @Override
                             public void onActionEvent(QQActionEvent event) {
@@ -128,7 +135,7 @@ public class QRcodeLoginTest {
                 sendMsg(revMsg.getFrom());
                 break;
             case GROUP_MSG:
-                sendMsg(revMsg.getGroup());
+                sendMsg(revMsg.getGroup(),revMsg.getFrom().getCard());
                 break;
             case DISCUZ_MSG:
                 sendDiscuz(revMsg.getDiscuz());
@@ -150,7 +157,7 @@ public class QRcodeLoginTest {
         mClient.sendMsg(sendMsg, null);                     // 调用接口发送消息
     }
 
-    public static void sendMsg(QQGroup group) {
+    public static void sendMsg(QQGroup group,String msg) {
         System.out.println("sendMsg " + group);
 
         // 组装QQ消息发送回去
@@ -158,7 +165,7 @@ public class QRcodeLoginTest {
         sendMsg.setGroup(group);                                // QQ好友UIN
         sendMsg.setType(QQMsg.Type.GROUP_MSG);              // 发送类型为好友
         // QQ内容
-        sendMsg.addContentItem(new TextItem("hello from iqq: https://github.com/im-qq")); // 添加文本内容
+        sendMsg.addContentItem(new TextItem("hello" + msg +" from iqq: https://github.com/im-qq")); // 添加文本内容
         sendMsg.addContentItem(new FaceItem(74));           // QQ id为0的表情
         sendMsg.addContentItem(new FontItem());             // 使用默认字体
         mClient.sendMsg(sendMsg, null);                     // 调用接口发送消息

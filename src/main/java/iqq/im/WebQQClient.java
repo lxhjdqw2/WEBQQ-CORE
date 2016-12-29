@@ -14,14 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
  * Project  : WebQQCore
  * Package  : iqq.im
  * File     : WebQQClient.java
  * Author   : solosky < solosky772@qq.com >
- * Created  : 2012-8-1
- * License  : Apache License 2.0
+ * Created : 2012-8-1 License : Apache License 2.0
  */
 package iqq.im;
 
@@ -58,6 +56,7 @@ import java.util.Map;
  * @author solosky
  */
 public class WebQQClient implements QQClient, QQContext {
+
     private static final Logger LOG = LoggerFactory.getLogger(WebQQClient.class);
     private Map<QQService.Type, QQService> services;
     private Map<QQModule.Type, QQModule> modules;
@@ -66,22 +65,22 @@ public class WebQQClient implements QQClient, QQContext {
     private QQSession session;
     private QQStore store;
     private QQNotifyListener notifyListener;
+    public static int flag = 0;
 
     public WebQQClient(QQNotifyListener notifyListener, QQActorDispatcher actorDispatcher) {
         this("", "", notifyListener, actorDispatcher);
     }
 
     /**
-     * 构造方法，初始化模块和服务
-     * 账号/密码    监听器     线程执行器
+     * 构造方法，初始化模块和服务 账号/密码 监听器 线程执行器
      *
-     * @param username        a {@link java.lang.String} object.
-     * @param password        a {@link java.lang.String} object.
-     * @param notifyListener  a {@link iqq.im.QQNotifyListener} object.
+     * @param username a {@link java.lang.String} object.
+     * @param password a {@link java.lang.String} object.
+     * @param notifyListener a {@link iqq.im.QQNotifyListener} object.
      * @param actorDispatcher a {@link iqq.im.actor.QQActorDispatcher} object.
      */
     public WebQQClient(String username, String password,
-                       QQNotifyListener notifyListener, QQActorDispatcher actorDispatcher) {
+            QQNotifyListener notifyListener, QQActorDispatcher actorDispatcher) {
         this.modules = new HashMap<QQModule.Type, QQModule>();
         this.services = new HashMap<QQService.Type, QQService>();
 
@@ -149,7 +148,7 @@ public class WebQQClient implements QQClient, QQContext {
      */
     @Override
     public void setHttpProxy(ProxyType proxyType, String proxyHost,
-                             int proxyPort, String proxyAuthUser, String proxyAuthPassword) {
+            int proxyPort, String proxyAuthUser, String proxyAuthPassword) {
         HttpService http = getSerivce(QQService.Type.HTTP);
         http.setHttpProxy(proxyType, proxyHost, proxyPort,
                 proxyAuthUser, proxyAuthPassword);
@@ -168,8 +167,7 @@ public class WebQQClient implements QQClient, QQContext {
     /**
      * {@inheritDoc}
      * <p/>
-     * 获取QQ存储信息，包括获取过后的好友/群好友
-     * 还有一些其它的认证信息
+     * 获取QQ存储信息，包括获取过后的好友/群好友 还有一些其它的认证信息
      */
     @Override
     public QQStore getStore() {
@@ -266,7 +264,8 @@ public class WebQQClient implements QQClient, QQContext {
     }
 
     /**
-     * <p>getCaptcha.</p>
+     * <p>
+     * getCaptcha.</p>
      *
      * @param listener a {@link iqq.im.QQActionListener} object.
      */
@@ -535,7 +534,7 @@ public class WebQQClient implements QQClient, QQContext {
      */
     @Override
     public QQActionFuture getOffPic(OffPicItem offpic, QQMsg msg, OutputStream picout,
-                                    QQActionListener listener) {
+            QQActionListener listener) {
         ChatModule mod = getModule(QQModule.Type.CHAT);
         return mod.getOffPic(offpic, msg, picout, listener);
     }
@@ -547,7 +546,7 @@ public class WebQQClient implements QQClient, QQContext {
      */
     @Override
     public QQActionFuture getUserPic(CFaceItem cface, QQMsg msg,
-                                     OutputStream picout, QQActionListener listener) {
+            OutputStream picout, QQActionListener listener) {
         ChatModule mod = getModule(QQModule.Type.CHAT);
         return mod.getUserPic(cface, msg, picout, listener);
     }
@@ -559,7 +558,7 @@ public class WebQQClient implements QQClient, QQContext {
      */
     @Override
     public QQActionFuture getGroupPic(CFaceItem cface, QQMsg msg,
-                                      OutputStream picout, QQActionListener listener) {
+            OutputStream picout, QQActionListener listener) {
         ChatModule mod = getModule(QQModule.Type.CHAT);
         return mod.getGroupPic(cface, msg, picout, listener);
     }
@@ -647,8 +646,8 @@ public class WebQQClient implements QQClient, QQContext {
      */
     @Override
     public void submitVerify(String code, QQNotifyEvent verifyEvent) {
-        QQNotifyEventArgs.ImageVerify verify =
-                (QQNotifyEventArgs.ImageVerify) verifyEvent.getTarget();
+        QQNotifyEventArgs.ImageVerify verify
+                = (QQNotifyEventArgs.ImageVerify) verifyEvent.getTarget();
 
         if (verify.type == VerifyType.LOGIN) {
             ProcModule mod = getModule(QQModule.Type.PROC);
@@ -666,7 +665,6 @@ public class WebQQClient implements QQClient, QQContext {
         LoginModule mod = getModule(QQModule.Type.LOGIN);
         return mod.getCaptcha(account.getUin(), listener);
     }
-
 
     /**
      * {@inheritDoc}
@@ -689,7 +687,8 @@ public class WebQQClient implements QQClient, QQContext {
     }
 
     /**
-     * <p>getSelfInfo.</p>
+     * <p>
+     * getSelfInfo.</p>
      *
      * @param listener
      * @return
@@ -707,8 +706,8 @@ public class WebQQClient implements QQClient, QQContext {
      */
     @Override
     public void cancelVerify(QQNotifyEvent verifyEvent) throws QQException {
-        QQNotifyEventArgs.ImageVerify verify =
-                (QQNotifyEventArgs.ImageVerify) verifyEvent.getTarget();
+        QQNotifyEventArgs.ImageVerify verify
+                = (QQNotifyEventArgs.ImageVerify) verifyEvent.getTarget();
         verify.future.cancel();
     }
 

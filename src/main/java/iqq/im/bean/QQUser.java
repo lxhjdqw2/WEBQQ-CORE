@@ -14,14 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
  * Project  : WebQQCoreAsync
  * Package  : iqq.im.bean
  * File     : QQMember.java
  * Author   : solosky < solosky772@qq.com >
- * Created  : 2012-9-5
- * License  : Apache License 2.0
+ * Created : 2012-9-5 License : Apache License 2.0
  */
 package iqq.im.bean;
 
@@ -42,6 +40,7 @@ import org.json.JSONObject;
  * @author solosky
  */
 public abstract class QQUser implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private long uin = -2;
     private long qq;
@@ -50,6 +49,8 @@ public abstract class QQUser implements Serializable {
     private QQLevel level;    //等级
     private long loginDate; // 登录时间
     private String nickname; // 昵称
+    private String card; // 名片
+
     private String sign; // 个性签名
     private String gender; // 性别
     private Date birthday; // 出生日期
@@ -75,17 +76,26 @@ public abstract class QQUser implements Serializable {
     private transient BufferedImage face; // 头像,不能被序列化
     private QQAllow allow;        //对方加好友验证请求设置
 
-
     /**
-     * <p>Constructor for QQUser.</p>
+     * <p>
+     * Constructor for QQUser.</p>
      */
     public QQUser() {
         status = QQStatus.OFFLINE;
         level = new QQLevel();
     }
 
+    public String getCard() {
+        return card;
+    }
+
+    public void setCard(String card) {
+        this.card = card;
+    }
+
     /**
-     * <p>Getter for the field <code>loginDate</code>.</p>
+     * <p>
+     * Getter for the field <code>loginDate</code>.</p>
      *
      * @return a long.
      */
@@ -94,7 +104,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>loginDate</code>.</p>
+     * <p>
+     * Setter for the field <code>loginDate</code>.</p>
      *
      * @param loginDate a long.
      */
@@ -103,7 +114,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>status</code>.</p>
+     * <p>
+     * Getter for the field <code>status</code>.</p>
      *
      * @return a {@link iqq.im.bean.QQStatus} object.
      */
@@ -112,7 +124,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>status</code>.</p>
+     * <p>
+     * Setter for the field <code>status</code>.</p>
      *
      * @param status a {@link iqq.im.bean.QQStatus} object.
      */
@@ -121,7 +134,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>flag</code>.</p>
+     * <p>
+     * Getter for the field <code>flag</code>.</p>
      *
      * @return a int.
      */
@@ -130,7 +144,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>flag</code>.</p>
+     * <p>
+     * Setter for the field <code>flag</code>.</p>
      *
      * @param flag a int.
      */
@@ -139,7 +154,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>sign</code>.</p>
+     * <p>
+     * Getter for the field <code>sign</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -148,7 +164,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>sign</code>.</p>
+     * <p>
+     * Setter for the field <code>sign</code>.</p>
      *
      * @param sign a {@link java.lang.String} object.
      */
@@ -157,7 +174,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>birthday</code>.</p>
+     * <p>
+     * Getter for the field <code>birthday</code>.</p>
      *
      * @return a {@link java.util.Date} object.
      */
@@ -166,7 +184,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>birthday</code>.</p>
+     * <p>
+     * Setter for the field <code>birthday</code>.</p>
      *
      * @param birthday a {@link java.util.Date} object.
      */
@@ -175,7 +194,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>blood</code>.</p>
+     * <p>
+     * Getter for the field <code>blood</code>.</p>
      *
      * @return a int.
      */
@@ -184,7 +204,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>blood</code>.</p>
+     * <p>
+     * Setter for the field <code>blood</code>.</p>
      *
      * @param blood a int.
      */
@@ -193,7 +214,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>chineseZodiac</code>.</p>
+     * <p>
+     * Getter for the field <code>chineseZodiac</code>.</p>
      *
      * @return a int.
      */
@@ -202,7 +224,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>chineseZodiac</code>.</p>
+     * <p>
+     * Setter for the field <code>chineseZodiac</code>.</p>
      *
      * @param chineseZodiac a int.
      */
@@ -211,7 +234,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>city</code>.</p>
+     * <p>
+     * Getter for the field <code>city</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -220,7 +244,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>city</code>.</p>
+     * <p>
+     * Setter for the field <code>city</code>.</p>
      *
      * @param city a {@link java.lang.String} object.
      */
@@ -229,7 +254,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>college</code>.</p>
+     * <p>
+     * Getter for the field <code>college</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -238,7 +264,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>college</code>.</p>
+     * <p>
+     * Setter for the field <code>college</code>.</p>
      *
      * @param college a {@link java.lang.String} object.
      */
@@ -247,7 +274,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>constel</code>.</p>
+     * <p>
+     * Getter for the field <code>constel</code>.</p>
      *
      * @return a int.
      */
@@ -256,7 +284,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>constel</code>.</p>
+     * <p>
+     * Setter for the field <code>constel</code>.</p>
      *
      * @param constel a int.
      */
@@ -265,7 +294,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>country</code>.</p>
+     * <p>
+     * Getter for the field <code>country</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -274,7 +304,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>country</code>.</p>
+     * <p>
+     * Setter for the field <code>country</code>.</p>
      *
      * @param country a {@link java.lang.String} object.
      */
@@ -283,7 +314,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>email</code>.</p>
+     * <p>
+     * Getter for the field <code>email</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -292,7 +324,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>email</code>.</p>
+     * <p>
+     * Setter for the field <code>email</code>.</p>
      *
      * @param email a {@link java.lang.String} object.
      */
@@ -301,7 +334,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>gender</code>.</p>
+     * <p>
+     * Getter for the field <code>gender</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -310,7 +344,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>gender</code>.</p>
+     * <p>
+     * Setter for the field <code>gender</code>.</p>
      *
      * @param gender a {@link java.lang.String} object.
      */
@@ -319,7 +354,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>homepage</code>.</p>
+     * <p>
+     * Getter for the field <code>homepage</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -328,7 +364,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>homepage</code>.</p>
+     * <p>
+     * Setter for the field <code>homepage</code>.</p>
      *
      * @param homepage a {@link java.lang.String} object.
      */
@@ -337,7 +374,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>level</code>.</p>
+     * <p>
+     * Getter for the field <code>level</code>.</p>
      *
      * @return a {@link iqq.im.bean.QQLevel} object.
      */
@@ -346,7 +384,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>level</code>.</p>
+     * <p>
+     * Setter for the field <code>level</code>.</p>
      *
      * @param level a {@link iqq.im.bean.QQLevel} object.
      */
@@ -355,7 +394,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>mobile</code>.</p>
+     * <p>
+     * Getter for the field <code>mobile</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -364,7 +404,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>mobile</code>.</p>
+     * <p>
+     * Setter for the field <code>mobile</code>.</p>
      *
      * @param mobile a {@link java.lang.String} object.
      */
@@ -373,7 +414,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>nickname</code>.</p>
+     * <p>
+     * Getter for the field <code>nickname</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -382,7 +424,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>nickname</code>.</p>
+     * <p>
+     * Setter for the field <code>nickname</code>.</p>
      *
      * @param nickname a {@link java.lang.String} object.
      */
@@ -391,7 +434,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>occupation</code>.</p>
+     * <p>
+     * Getter for the field <code>occupation</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -400,7 +444,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>occupation</code>.</p>
+     * <p>
+     * Setter for the field <code>occupation</code>.</p>
      *
      * @param occupation a {@link java.lang.String} object.
      */
@@ -409,7 +454,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>personal</code>.</p>
+     * <p>
+     * Getter for the field <code>personal</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -418,7 +464,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>personal</code>.</p>
+     * <p>
+     * Setter for the field <code>personal</code>.</p>
      *
      * @param personal a {@link java.lang.String} object.
      */
@@ -427,7 +474,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>phone</code>.</p>
+     * <p>
+     * Getter for the field <code>phone</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -436,7 +484,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>phone</code>.</p>
+     * <p>
+     * Setter for the field <code>phone</code>.</p>
      *
      * @param phone a {@link java.lang.String} object.
      */
@@ -445,7 +494,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>province</code>.</p>
+     * <p>
+     * Getter for the field <code>province</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -454,7 +504,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>province</code>.</p>
+     * <p>
+     * Setter for the field <code>province</code>.</p>
      *
      * @param province a {@link java.lang.String} object.
      */
@@ -463,7 +514,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>regTime</code>.</p>
+     * <p>
+     * Getter for the field <code>regTime</code>.</p>
      *
      * @return a int.
      */
@@ -472,7 +524,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>regTime</code>.</p>
+     * <p>
+     * Setter for the field <code>regTime</code>.</p>
      *
      * @param regTime a int.
      */
@@ -481,7 +534,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>stat</code>.</p>
+     * <p>
+     * Getter for the field <code>stat</code>.</p>
      *
      * @return a int.
      */
@@ -490,7 +544,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>stat</code>.</p>
+     * <p>
+     * Setter for the field <code>stat</code>.</p>
      *
      * @param stat a int.
      */
@@ -499,7 +554,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>uin</code>.</p>
+     * <p>
+     * Getter for the field <code>uin</code>.</p>
      *
      * @return a long.
      */
@@ -508,7 +564,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>uin</code>.</p>
+     * <p>
+     * Setter for the field <code>uin</code>.</p>
      *
      * @param uin a long.
      */
@@ -517,7 +574,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>cip</code>.</p>
+     * <p>
+     * Getter for the field <code>cip</code>.</p>
      *
      * @return a int.
      */
@@ -526,7 +584,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>cip</code>.</p>
+     * <p>
+     * Setter for the field <code>cip</code>.</p>
      *
      * @param cip a int.
      */
@@ -535,7 +594,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>isVip.</p>
+     * <p>
+     * isVip.</p>
      *
      * @return a boolean.
      */
@@ -544,7 +604,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>setVip.</p>
+     * <p>
+     * setVip.</p>
      *
      * @param isVip a boolean.
      */
@@ -553,7 +614,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>vipLevel</code>.</p>
+     * <p>
+     * Getter for the field <code>vipLevel</code>.</p>
      *
      * @return a int.
      */
@@ -562,7 +624,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>vipLevel</code>.</p>
+     * <p>
+     * Setter for the field <code>vipLevel</code>.</p>
      *
      * @param vipLevel a int.
      */
@@ -571,7 +634,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>face</code>.</p>
+     * <p>
+     * Getter for the field <code>face</code>.</p>
      *
      * @return a {@link java.awt.image.BufferedImage} object.
      */
@@ -580,7 +644,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>face</code>.</p>
+     * <p>
+     * Setter for the field <code>face</code>.</p>
      *
      * @param face a {@link java.awt.image.BufferedImage} object.
      */
@@ -589,7 +654,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>clientType</code>.</p>
+     * <p>
+     * Getter for the field <code>clientType</code>.</p>
      *
      * @return a {@link iqq.im.bean.QQClientType} object.
      */
@@ -598,7 +664,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>clientType</code>.</p>
+     * <p>
+     * Setter for the field <code>clientType</code>.</p>
      *
      * @param clientType a {@link iqq.im.bean.QQClientType} object.
      */
@@ -607,7 +674,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Getter for the field <code>allow</code>.</p>
+     * <p>
+     * Getter for the field <code>allow</code>.</p>
      *
      * @return a {@link iqq.im.bean.QQAllow} object.
      */
@@ -616,7 +684,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>Setter for the field <code>allow</code>.</p>
+     * <p>
+     * Setter for the field <code>allow</code>.</p>
      *
      * @param allow a {@link iqq.im.bean.QQAllow} object.
      */
@@ -624,7 +693,9 @@ public abstract class QQUser implements Serializable {
         this.allow = allow;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "QQUser [qq=" + qq + ", uin=" + uin + ", nickname=" + nickname + ", status="
@@ -632,7 +703,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>getQQ.</p>
+     * <p>
+     * getQQ.</p>
      *
      * @return the qq
      */
@@ -641,7 +713,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>setQQ.</p>
+     * <p>
+     * setQQ.</p>
      *
      * @param qq the qq to set
      */
@@ -649,13 +722,17 @@ public abstract class QQUser implements Serializable {
         this.qq = qq;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return (int) this.getUin();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -675,7 +752,8 @@ public abstract class QQUser implements Serializable {
     }
 
     /**
-     * <p>parseFromJson.</p>
+     * <p>
+     * parseFromJson.</p>
      *
      * @param json a {@link org.json.JSONObject} object.
      * @throws org.json.JSONException if any.
@@ -714,6 +792,5 @@ public abstract class QQUser implements Serializable {
             }
         }
     }
-
 
 }
